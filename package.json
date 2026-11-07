@@ -1,0 +1,17 @@
+{
+  "name": "rolletto",
+  "private": true,
+  "description": "Monte Carlo DCF and LBO valuation platform",
+  "scripts": {
+    "setup": "npm install && npm --prefix frontend install && cd backend && python -m venv .venv && cd .. && node scripts/py.mjs -m pip install -r requirements-dev.txt",
+    "dev": "concurrently -n api,web -c blue,magenta \"npm:dev:backend\" \"npm:dev:frontend\"",
+    "dev:backend": "node scripts/py.mjs -m uvicorn app.main:app --reload --reload-dir app --port 8000",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "test": "node scripts/py.mjs -m pytest",
+    "lint": "node scripts/py.mjs -m ruff check app tests && npm --prefix frontend run lint && npm --prefix frontend run typecheck",
+    "build": "npm --prefix frontend run build"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
