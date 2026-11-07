@@ -74,7 +74,7 @@ export function Histogram({ stats, label, format, color = C.dcf, threshold, mark
               );
             }}
           />
-          <Bar xAxisId="bins" dataKey="count" radius={[2, 2, 0, 0]} isAnimationActive animationDuration={500}>
+          <Bar xAxisId="bins" dataKey="count" radius={[2, 2, 0, 0]} isAnimationActive={false}>
             {data.map((d) => (
               <Cell key={d.mid} fill={threshold === undefined || d.mid >= threshold ? color : C.muted} />
             ))}

@@ -106,7 +106,15 @@ function Analysis({ company, toggle }: { company: Company; toggle: React.ReactNo
   const [distributions, setDistributions] = React.useState<Record<string, Distribution>>(initial?.distributions ?? {});
   const [settings, setSettings] = React.useState<SimSettings>(initial?.settings ?? DEFAULT_SETTINGS);
   const [peers, setPeers] = React.useState<string[] | null>(initial?.peers ?? null);
-  const [tab, setTab] = React.useState<string>("overview");
+  // The active tab lives in the URL hash (e.g. #lbo) so tabs can be deep-linked and shared.
+  const [tab, setTabState] = React.useState<string>(() => {
+    const hash = window.location.hash.slice(1);
+    return TABS.some((t) => t.value === hash) ? hash : "overview";
+  });
+  const setTab = (t: string) => {
+    setTabState(t);
+    window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}#${t}`);
+  };
   const [panelOpen, setPanelOpen] = React.useState(false);
 
   const request = React.useMemo<ValuationRequest>(
@@ -128,7 +136,7 @@ function Analysis({ company, toggle }: { company: Company; toggle: React.ReactNo
       { overrides: debounced.overrides, distributions: debounced.distributions, settings: debounced.settings, peers: debounced.peers ?? null },
       DEFAULT_SETTINGS,
     );
-    window.history.replaceState(null, "", encoded ? `?a=${encoded}` : window.location.pathname);
+    window.history.replaceState(null, "", `${encoded ? `?a=${encoded}` : window.location.pathname}${window.location.hash}`);
   }, [debounced]);
 
   const error = valuationQ.error;

@@ -164,3 +164,19 @@ math[display="block"] {
     grid-template-columns: minmax(0, 1fr) 340px;
   }
 }
+
+/* Range bars (football field, tornado): the final width is in the markup; CSS only animates the reveal,
+   so charts render correctly without JavaScript and in print/screenshot contexts. */
+.rb-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: rb-grow 0.55s ease-out both;
+  transition:
+    width 0.4s ease-out,
+    x 0.4s ease-out;
+}
+@keyframes rb-grow {
+  from {
+    transform: scaleX(0);
+  }
+}

@@ -88,9 +88,9 @@ export function CovenantChart({ data }: { data: Valuation["monte_carlo"]["covena
             }
           />
           <Legend wrapperStyle={legendStyle} iconType="circle" iconSize={8} />
-          <Bar name="Leverage" dataKey="leverage" fill={C.warning} radius={[2, 2, 0, 0]} />
-          <Bar name="Coverage" dataKey="coverage" fill={C.comps} radius={[2, 2, 0, 0]} />
-          <Bar name="Either" dataKey="any" fill={C.negative} radius={[2, 2, 0, 0]} />
+          <Bar isAnimationActive={false} name="Leverage" dataKey="leverage" fill={C.warning} radius={[2, 2, 0, 0]} />
+          <Bar isAnimationActive={false} name="Coverage" dataKey="coverage" fill={C.comps} radius={[2, 2, 0, 0]} />
+          <Bar isAnimationActive={false} name="Either" dataKey="any" fill={C.negative} radius={[2, 2, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </ChartFrame>
@@ -145,9 +145,9 @@ export function ProjectionChart({ rows, format }: { rows: ProjectionRow[]; forma
               label={{ value: "LTM", position: "top", fontSize: 10, fill: "var(--fg-subtle)" }}
             />
           )}
-          <Bar yAxisId="v" name="Revenue" dataKey="revenue" fill={C.dcf} fillOpacity={0.85} radius={[2, 2, 0, 0]} />
-          <Bar yAxisId="v" name="EBITDA" dataKey="ebitda" fill={C.lbo} fillOpacity={0.85} radius={[2, 2, 0, 0]} />
-          <Line yAxisId="m" name="EBITDA margin" dataKey="margin" stroke={C.warning} strokeWidth={2} dot={{ r: 2.5 }} />
+          <Bar isAnimationActive={false} yAxisId="v" name="Revenue" dataKey="revenue" fill={C.dcf} fillOpacity={0.85} radius={[2, 2, 0, 0]} />
+          <Bar isAnimationActive={false} yAxisId="v" name="EBITDA" dataKey="ebitda" fill={C.lbo} fillOpacity={0.85} radius={[2, 2, 0, 0]} />
+          <Line isAnimationActive={false} yAxisId="m" name="EBITDA margin" dataKey="margin" stroke={C.warning} strokeWidth={2} dot={{ r: 2.5 }} />
         </ComposedChart>
       </ResponsiveContainer>
     </ChartFrame>
