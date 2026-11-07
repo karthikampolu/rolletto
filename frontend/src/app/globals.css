@@ -1,70 +1,12 @@
 @import "tailwindcss";
 
 /*
- * Rolletto design tokens. Every colour, radius and shadow used in the app is defined here once.
- * Dark is the primary theme; light mirrors it with AA-contrast equivalents.
+ * Rolletto design tokens. Colour palettes, typefaces, corner radii and density live in themes.css and
+ * are switched by data attributes on <html> (see src/lib/appearance.ts); everything else maps onto them.
  */
+@import "./themes.css";
+
 @custom-variant dark (&:where(.dark, .dark *));
-
-:root {
-  --bg: #f6f7fa;
-  --bg-elevated: #ffffff;
-  --surface: #ffffff;
-  --surface-2: #f0f3f8;
-  --surface-3: #e7ecf3;
-  --border: #e1e6ee;
-  --border-strong: #c9d2df;
-  --fg: #0b1220;
-  --fg-muted: #44516a;
-  --fg-subtle: #5d6a80;
-  --accent: #2f5bea;
-  --accent-strong: #2449c4;
-  --accent-fg: #ffffff;
-  --accent-soft: rgb(47 91 234 / 0.1);
-  --positive: #0b8a61;
-  --negative: #d61f47;
-  --warning: #a8670f;
-  --series-dcf: #2f5bea;
-  --series-lbo: #0d8f83;
-  --series-comps: #7c3aed;
-  --series-market: #64748b;
-  --marker: #d61f47;
-  --grid: rgb(15 23 42 / 0.07);
-  --shadow-sm: 0 1px 2px rgb(15 23 42 / 0.06);
-  --shadow-md: 0 8px 24px -12px rgb(15 23 42 / 0.18);
-  --shadow-lg: 0 24px 60px -24px rgb(15 23 42 / 0.28);
-  --ring: rgb(47 91 234 / 0.55);
-}
-
-.dark {
-  --bg: #070a10;
-  --bg-elevated: #0b1018;
-  --surface: #0f1520;
-  --surface-2: #141c2a;
-  --surface-3: #1b2536;
-  --border: #1d2738;
-  --border-strong: #2b384e;
-  --fg: #e8edf5;
-  --fg-muted: #a3afc3;
-  --fg-subtle: #8592a8;
-  --accent: #6a96ff;
-  --accent-strong: #8aadff;
-  --accent-fg: #06101f;
-  --accent-soft: rgb(106 150 255 / 0.14);
-  --positive: #34d6a6;
-  --negative: #ff6f86;
-  --warning: #f2b552;
-  --series-dcf: #6a96ff;
-  --series-lbo: #2fd3c0;
-  --series-comps: #b195ff;
-  --series-market: #8b98ad;
-  --marker: #ff6f86;
-  --grid: rgb(148 163 184 / 0.09);
-  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
-  --shadow-md: 0 10px 30px -14px rgb(0 0 0 / 0.7);
-  --shadow-lg: 0 30px 80px -30px rgb(0 0 0 / 0.85);
-  --ring: rgb(106 150 255 / 0.6);
-}
 
 @theme inline {
   --color-bg: var(--bg);
@@ -90,16 +32,16 @@
   --color-series-market: var(--series-market);
   --color-marker: var(--marker);
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", monospace;
+  --font-sans: var(--font-ui), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-num), ui-monospace, "SFMono-Regular", monospace;
 
   --text-2xs: 0.6875rem;
   --text-2xs--line-height: 1rem;
 
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
-  --radius-xl: 20px;
+  --radius-sm: var(--r-sm);
+  --radius-md: var(--r-md);
+  --radius-lg: var(--r-lg);
+  --radius-xl: var(--r-xl);
 
   --animate-shimmer: shimmer 1.6s linear infinite;
   --animate-indeterminate: indeterminate 1.1s ease-in-out infinite;
@@ -139,12 +81,12 @@
   body {
     background: var(--bg);
     color: var(--fg);
-    font-family: var(--font-sans);
+    font-family: var(--font-ui), ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
   :focus-visible {
-    outline: 2px solid var(--ring);
+    outline: 2px solid color-mix(in srgb, var(--accent) 60%, transparent);
     outline-offset: 2px;
   }
   ::selection {
@@ -161,7 +103,7 @@
 }
 
 @utility num {
-  font-family: var(--font-mono);
+  font-family: var(--font-num), ui-monospace, monospace;
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum", "zero";
   letter-spacing: -0.01em;
@@ -199,5 +141,26 @@ math[display="block"] {
   font-size: 11px;
 }
 .recharts-cartesian-axis-tick-value {
-  font-family: var(--font-mono);
+  font-family: var(--font-num), ui-monospace, monospace;
+}
+
+/* Workspace layout: assumptions panel on the left (default) or right */
+@media (min-width: 64rem) {
+  .ws-grid {
+    grid-template-columns: 320px minmax(0, 1fr);
+  }
+  html[data-panel="right"] .ws-grid {
+    grid-template-columns: minmax(0, 1fr) 320px;
+  }
+  html[data-panel="right"] .ws-aside {
+    order: 2;
+  }
+}
+@media (min-width: 80rem) {
+  .ws-grid {
+    grid-template-columns: 340px minmax(0, 1fr);
+  }
+  html[data-panel="right"] .ws-grid {
+    grid-template-columns: minmax(0, 1fr) 340px;
+  }
 }

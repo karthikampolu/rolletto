@@ -184,10 +184,10 @@ function Analysis({ company, toggle }: { company: Company; toggle: React.ReactNo
           </>
         }
       />
-      <div className="mx-auto grid max-w-[1600px] gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[320px_minmax(0,1fr)] xl:grid-cols-[340px_minmax(0,1fr)]">
+      <div className="ws-grid mx-auto grid max-w-[1600px] gap-6 px-4 py-6 sm:px-6">
         <aside
           aria-label="Assumptions and simulation settings"
-          className="lg:sticky lg:top-[4.5rem] lg:max-h-[calc(100dvh-5.5rem)] lg:overflow-y-auto lg:pr-2"
+          className="ws-aside lg:sticky lg:top-[4.5rem] lg:max-h-[calc(100dvh-5.5rem)] lg:overflow-y-auto lg:pr-2"
         >
           <Button variant="secondary" className="w-full justify-between lg:hidden" aria-expanded={panelOpen} onClick={() => setPanelOpen((o) => !o)}>
             <span className="flex items-center gap-2">

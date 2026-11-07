@@ -1,0 +1,389 @@
+/*
+ * Rolletto themes. Each palette defines the full token set for light and dark mode.
+ *
+ * Selectors work on any element, not just <html>, so the Appearance panel can render a live preview
+ * card per palette: `[data-palette="x"]` is light, `.dark[data-palette="x"]` / `.dark [data-palette="x"]`
+ * is dark. "midnight" is also the :root default.
+ *
+ * All text tokens (fg, fg-muted, fg-subtle, accent on bg) meet WCAG AA against their backgrounds.
+ */
+
+/* ---------------------------------------------------------------- Midnight — institutional navy */
+:root,
+[data-palette="midnight"] {
+  --bg: #f6f7fa;
+  --bg-elevated: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f0f3f8;
+  --surface-3: #e7ecf3;
+  --border: #e1e6ee;
+  --border-strong: #c9d2df;
+  --fg: #0b1220;
+  --fg-muted: #44516a;
+  --fg-subtle: #5d6a80;
+  --accent: #2f5bea;
+  --accent-strong: #2449c4;
+  --accent-fg: #ffffff;
+  --accent-soft: rgb(47 91 234 / 0.1);
+  --positive: #0b8a61;
+  --negative: #d61f47;
+  --warning: #a8670f;
+  --series-dcf: #2f5bea;
+  --series-lbo: #0d8f83;
+  --series-comps: #7c3aed;
+  --series-market: #64748b;
+  --marker: #d61f47;
+  --grid: rgb(15 23 42 / 0.07);
+}
+.dark,
+.dark[data-palette="midnight"],
+.dark [data-palette="midnight"] {
+  --bg: #070a10;
+  --bg-elevated: #0b1018;
+  --surface: #0f1520;
+  --surface-2: #141c2a;
+  --surface-3: #1b2536;
+  --border: #1d2738;
+  --border-strong: #2b384e;
+  --fg: #e8edf5;
+  --fg-muted: #a3afc3;
+  --fg-subtle: #8592a8;
+  --accent: #6a96ff;
+  --accent-strong: #8aadff;
+  --accent-fg: #06101f;
+  --accent-soft: rgb(106 150 255 / 0.14);
+  --positive: #34d6a6;
+  --negative: #ff6f86;
+  --warning: #f2b552;
+  --series-dcf: #6a96ff;
+  --series-lbo: #2fd3c0;
+  --series-comps: #b195ff;
+  --series-market: #8b98ad;
+  --marker: #ff6f86;
+  --grid: rgb(148 163 184 / 0.09);
+}
+
+/* ---------------------------------------------------------------- Terminal — trading-desk amber */
+[data-palette="terminal"] {
+  --bg: #f5f3ee;
+  --bg-elevated: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #efece4;
+  --surface-3: #e4dfd3;
+  --border: #ddd7c9;
+  --border-strong: #c4bca9;
+  --fg: #14110a;
+  --fg-muted: #4a4436;
+  --fg-subtle: #655d4b;
+  --accent: #9a5f00;
+  --accent-strong: #7d4d00;
+  --accent-fg: #ffffff;
+  --accent-soft: rgb(154 95 0 / 0.1);
+  --positive: #0a7d44;
+  --negative: #c8102e;
+  --warning: #9a5f00;
+  --series-dcf: #9a5f00;
+  --series-lbo: #0072a3;
+  --series-comps: #7c3aed;
+  --series-market: #6b6350;
+  --marker: #c8102e;
+  --grid: rgb(20 17 10 / 0.07);
+}
+.dark[data-palette="terminal"],
+.dark [data-palette="terminal"] {
+  --bg: #050505;
+  --bg-elevated: #0c0c0c;
+  --surface: #101010;
+  --surface-2: #181818;
+  --surface-3: #222222;
+  --border: #242424;
+  --border-strong: #383838;
+  --fg: #f2f2f2;
+  --fg-muted: #b5b5b5;
+  --fg-subtle: #8f8f8f;
+  --accent: #ffb000;
+  --accent-strong: #ffc640;
+  --accent-fg: #1a1200;
+  --accent-soft: rgb(255 176 0 / 0.14);
+  --positive: #00d26a;
+  --negative: #ff4d4d;
+  --warning: #ffb000;
+  --series-dcf: #ffb000;
+  --series-lbo: #00c8ff;
+  --series-comps: #c084fc;
+  --series-market: #8f8f8f;
+  --marker: #ff4d4d;
+  --grid: rgb(255 255 255 / 0.06);
+}
+
+/* ---------------------------------------------------------------- Graphite — neutral, emerald */
+[data-palette="graphite"] {
+  --bg: #fafafa;
+  --bg-elevated: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f4f4f5;
+  --surface-3: #e4e4e7;
+  --border: #e4e4e7;
+  --border-strong: #d4d4d8;
+  --fg: #09090b;
+  --fg-muted: #3f3f46;
+  --fg-subtle: #5f5f69;
+  --accent: #047857;
+  --accent-strong: #065f46;
+  --accent-fg: #ffffff;
+  --accent-soft: rgb(4 120 87 / 0.1);
+  --positive: #047857;
+  --negative: #b91c1c;
+  --warning: #a16207;
+  --series-dcf: #047857;
+  --series-lbo: #1d4ed8;
+  --series-comps: #6d28d9;
+  --series-market: #71717a;
+  --marker: #b91c1c;
+  --grid: rgb(9 9 11 / 0.06);
+}
+.dark[data-palette="graphite"],
+.dark [data-palette="graphite"] {
+  --bg: #09090b;
+  --bg-elevated: #0f0f12;
+  --surface: #131316;
+  --surface-2: #1a1a1f;
+  --surface-3: #232329;
+  --border: #23232a;
+  --border-strong: #34343d;
+  --fg: #ededef;
+  --fg-muted: #a1a1aa;
+  --fg-subtle: #8b8b94;
+  --accent: #34d399;
+  --accent-strong: #6ee7b7;
+  --accent-fg: #022c1e;
+  --accent-soft: rgb(52 211 153 / 0.13);
+  --positive: #34d399;
+  --negative: #f87171;
+  --warning: #fbbf24;
+  --series-dcf: #34d399;
+  --series-lbo: #60a5fa;
+  --series-comps: #c4b5fd;
+  --series-market: #a1a1aa;
+  --marker: #f87171;
+  --grid: rgb(255 255 255 / 0.06);
+}
+
+/* ---------------------------------------------------------------- Ivory — editorial, oxblood */
+[data-palette="ivory"] {
+  --bg: #fbf6ee;
+  --bg-elevated: #fffdf8;
+  --surface: #fffdf8;
+  --surface-2: #f3ebdd;
+  --surface-3: #e9dec9;
+  --border: #e6dccb;
+  --border-strong: #cdbfa6;
+  --fg: #1d1a16;
+  --fg-muted: #4b443a;
+  --fg-subtle: #665d4f;
+  --accent: #8b1e3f;
+  --accent-strong: #6e1631;
+  --accent-fg: #ffffff;
+  --accent-soft: rgb(139 30 63 / 0.09);
+  --positive: #2f6b3a;
+  --negative: #b42318;
+  --warning: #8f6200;
+  --series-dcf: #0f4c81;
+  --series-lbo: #8b1e3f;
+  --series-comps: #b45309;
+  --series-market: #7a6f5d;
+  --marker: #b42318;
+  --grid: rgb(29 26 22 / 0.07);
+}
+.dark[data-palette="ivory"],
+.dark [data-palette="ivory"] {
+  --bg: #15120e;
+  --bg-elevated: #1b1712;
+  --surface: #1f1a14;
+  --surface-2: #28211a;
+  --surface-3: #332a21;
+  --border: #2f281f;
+  --border-strong: #463b2e;
+  --fg: #f3ead9;
+  --fg-muted: #c9bca5;
+  --fg-subtle: #a39580;
+  --accent: #e8849e;
+  --accent-strong: #f2a8bb;
+  --accent-fg: #1d0a10;
+  --accent-soft: rgb(232 132 158 / 0.14);
+  --positive: #7cc48a;
+  --negative: #f2836b;
+  --warning: #e0b04a;
+  --series-dcf: #7fb2e5;
+  --series-lbo: #e8849e;
+  --series-comps: #e0a458;
+  --series-market: #a39580;
+  --marker: #f2836b;
+  --grid: rgb(243 234 217 / 0.07);
+}
+
+/* ---------------------------------------------------------------- Aurora — indigo & violet */
+[data-palette="aurora"] {
+  --bg: #f7f6ff;
+  --bg-elevated: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f0eeff;
+  --surface-3: #e4e0fb;
+  --border: #e2defa;
+  --border-strong: #c9c2f0;
+  --fg: #140f33;
+  --fg-muted: #463f6e;
+  --fg-subtle: #5f5888;
+  --accent: #6d28d9;
+  --accent-strong: #5b21b6;
+  --accent-fg: #ffffff;
+  --accent-soft: rgb(109 40 217 / 0.09);
+  --positive: #0f766e;
+  --negative: #be123c;
+  --warning: #a16207;
+  --series-dcf: #6d28d9;
+  --series-lbo: #0f766e;
+  --series-comps: #be185d;
+  --series-market: #6b6590;
+  --marker: #be123c;
+  --grid: rgb(20 15 51 / 0.07);
+}
+.dark[data-palette="aurora"],
+.dark [data-palette="aurora"] {
+  --bg: #0b0920;
+  --bg-elevated: #110e2a;
+  --surface: #151233;
+  --surface-2: #1c1840;
+  --surface-3: #26204f;
+  --border: #241f4a;
+  --border-strong: #362f66;
+  --fg: #eeeaff;
+  --fg-muted: #b4acd9;
+  --fg-subtle: #938bbd;
+  --accent: #a78bfa;
+  --accent-strong: #c4b5fd;
+  --accent-fg: #160f33;
+  --accent-soft: rgb(167 139 250 / 0.16);
+  --positive: #2dd4bf;
+  --negative: #fb7185;
+  --warning: #fbbf24;
+  --series-dcf: #a78bfa;
+  --series-lbo: #2dd4bf;
+  --series-comps: #f472b6;
+  --series-market: #938bbd;
+  --marker: #fb7185;
+  --grid: rgb(238 234 255 / 0.07);
+}
+
+/* ---------------------------------------------------------------- Monaco — casino felt & gold */
+[data-palette="monaco"] {
+  --bg: #f4f7f2;
+  --bg-elevated: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #eaf0e8;
+  --surface-3: #dbe5d8;
+  --border: #d9e3d6;
+  --border-strong: #b9c9b4;
+  --fg: #0b1f16;
+  --fg-muted: #3a5244;
+  --fg-subtle: #52665a;
+  --accent: #0b5d3b;
+  --accent-strong: #084a2f;
+  --accent-fg: #ffffff;
+  --accent-soft: rgb(11 93 59 / 0.1);
+  --positive: #15803d;
+  --negative: #b91c1c;
+  --warning: #8a6d00;
+  --series-dcf: #0b5d3b;
+  --series-lbo: #8a6d00;
+  --series-comps: #1d4ed8;
+  --series-market: #55695d;
+  --marker: #b91c1c;
+  --grid: rgb(11 31 22 / 0.07);
+}
+.dark[data-palette="monaco"],
+.dark [data-palette="monaco"] {
+  --bg: #06140f;
+  --bg-elevated: #0a1c15;
+  --surface: #0d221a;
+  --surface-2: #122c22;
+  --surface-3: #18382b;
+  --border: #173428;
+  --border-strong: #23493a;
+  --fg: #eef5ef;
+  --fg-muted: #a9c2b3;
+  --fg-subtle: #88a294;
+  --accent: #d4af37;
+  --accent-strong: #e8c766;
+  --accent-fg: #1a1405;
+  --accent-soft: rgb(212 175 55 / 0.15);
+  --positive: #4ade80;
+  --negative: #f05252;
+  --warning: #e8c766;
+  --series-dcf: #d4af37;
+  --series-lbo: #4ade80;
+  --series-comps: #93c5fd;
+  --series-market: #88a294;
+  --marker: #f05252;
+  --grid: rgb(238 245 239 / 0.07);
+}
+
+/* ---------------------------------------------------------------- Mode-level tokens (all palettes) */
+:root {
+  --shadow-sm: 0 1px 2px rgb(15 23 42 / 0.06);
+  --shadow-md: 0 8px 24px -12px rgb(15 23 42 / 0.18);
+  --shadow-lg: 0 24px 60px -24px rgb(15 23 42 / 0.28);
+}
+.dark {
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-md: 0 10px 30px -14px rgb(0 0 0 / 0.7);
+  --shadow-lg: 0 30px 80px -30px rgb(0 0 0 / 0.85);
+}
+
+/* ---------------------------------------------------------------- Typefaces */
+:root {
+  --font-ui: var(--font-inter);
+  --font-num: var(--font-jetbrains);
+}
+[data-font="plex"] {
+  --font-ui: var(--font-plex);
+}
+[data-font="grotesk"] {
+  --font-ui: var(--font-grotesk);
+}
+[data-font="manrope"] {
+  --font-ui: var(--font-manrope);
+}
+[data-mono="plex"] {
+  --font-num: var(--font-plexmono);
+}
+
+/* ---------------------------------------------------------------- Corners */
+:root {
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+}
+[data-radius="sharp"] {
+  --r-sm: 2px;
+  --r-md: 3px;
+  --r-lg: 4px;
+  --r-xl: 6px;
+}
+[data-radius="round"] {
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+}
+
+/* ---------------------------------------------------------------- Density (scales type and spacing together) */
+html[data-density="compact"] {
+  font-size: 93.75%;
+  --spacing: 0.225rem;
+}
+html[data-density="spacious"] {
+  font-size: 103%;
+  --spacing: 0.27rem;
+}

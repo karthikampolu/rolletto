@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import * as React from "react";
 
 import { Logo } from "@/components/layout/logo";
-import { ThemeToggle } from "@/components/layout/theme-toggle";
+import { AppearanceMenu } from "@/components/layout/appearance-menu";
 import { TickerSearch } from "@/components/search/ticker-search";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -73,7 +73,7 @@ export function Navbar() {
           <React.Suspense fallback={null}>
             <NavSearch />
           </React.Suspense>
-          <ThemeToggle />
+          <AppearanceMenu />
           <Button
             variant="ghost"
             size="icon"

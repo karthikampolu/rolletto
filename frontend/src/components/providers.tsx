@@ -1,7 +1,6 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ThemeProvider } from "next-themes";
 import * as React from "react";
 import { Toaster } from "sonner";
 
@@ -23,21 +22,19 @@ export function Providers({ children }: { children: React.ReactNode }) {
       }),
   );
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-      <QueryClientProvider client={client}>
-        <TooltipProvider delayDuration={150}>
-          {children}
-          <Toaster
-            position="bottom-right"
-            toastOptions={{
-              classNames: {
-                toast: "!bg-bg-elevated !border-border-strong !text-fg !shadow-token-lg",
-                description: "!text-fg-muted",
-              },
-            }}
-          />
-        </TooltipProvider>
-      </QueryClientProvider>
-    </ThemeProvider>
+    <QueryClientProvider client={client}>
+      <TooltipProvider delayDuration={150}>
+        {children}
+        <Toaster
+          position="bottom-right"
+          toastOptions={{
+            classNames: {
+              toast: "!bg-bg-elevated !border-border-strong !text-fg !shadow-token-lg",
+              description: "!text-fg-muted",
+            },
+          }}
+        />
+      </TooltipProvider>
+    </QueryClientProvider>
   );
 }
