@@ -9,6 +9,14 @@ export const metadata: Metadata = {
   description:
     "How Rolletto values a company: data cleaning, assumption derivation, CAPM WACC, two-method DCF, LBO debt schedule, correlated Monte Carlo, sensitivity and limitations.",
   alternates: { canonical: "/methodology" },
+  openGraph: {
+    type: "website",
+    siteName: "Rolletto",
+    title: "Methodology · Rolletto",
+    description:
+      "How Rolletto values a company: data cleaning, assumption derivation, CAPM WACC, two-method DCF, LBO debt schedule, correlated Monte Carlo, sensitivity and limitations.",
+    url: "/methodology",
+  },
 };
 
 const TOC = [

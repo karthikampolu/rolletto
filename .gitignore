@@ -18,3 +18,6 @@ Thumbs.db
 
 # Node (root)
 node_modules/
+
+# Marketing images (large binaries; kept out of git)
+marketing/

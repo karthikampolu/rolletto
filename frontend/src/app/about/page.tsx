@@ -8,6 +8,13 @@ export const metadata: Metadata = {
   title: "About",
   description: "Why Rolletto exists, who it is for, and how it is built.",
   alternates: { canonical: "/about" },
+  openGraph: {
+    type: "website",
+    siteName: "Rolletto",
+    title: "About · Rolletto",
+    description: "Why Rolletto exists, who it is for, and how it is built.",
+    url: "/about",
+  },
 };
 
 const STACK = [

@@ -29,8 +29,14 @@ export const metadata: Metadata = {
   description: DESCRIPTION,
   applicationName: "Rolletto",
   keywords: ["DCF", "LBO", "Monte Carlo", "valuation", "football field", "WACC", "IRR", "equity research"],
-  openGraph: { type: "website", siteName: "Rolletto", title: "Rolletto — Monte Carlo valuation", description: DESCRIPTION, url: "/" },
-  twitter: { card: "summary_large_image", title: "Rolletto — Monte Carlo valuation", description: DESCRIPTION },
+  openGraph: {
+    type: "website",
+    siteName: "Rolletto",
+    locale: "en_US",
+    title: "Rolletto — Monte Carlo valuation for any public company",
+    description: DESCRIPTION,
+  },
+  twitter: { card: "summary_large_image", title: "Rolletto — Monte Carlo valuation for any public company", description: DESCRIPTION },
   alternates: { canonical: "/" },
 };
 

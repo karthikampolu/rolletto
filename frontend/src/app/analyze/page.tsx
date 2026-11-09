@@ -7,6 +7,13 @@ export const metadata: Metadata = {
   title: "Analyze a company",
   description: "Search any public company by name or ticker and get a probabilistic DCF and LBO valuation.",
   alternates: { canonical: "/analyze" },
+  openGraph: {
+    type: "website",
+    siteName: "Rolletto",
+    title: "Analyze a company · Rolletto",
+    description: "Search any public company by name or ticker and get a probabilistic DCF and LBO valuation.",
+    url: "/analyze",
+  },
 };
 
 export default function AnalyzeIndex() {
