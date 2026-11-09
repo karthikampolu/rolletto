@@ -90,13 +90,46 @@ class YFinanceProvider:
 
     def _info(self, ticker: str) -> dict[str, Any]:
         def load() -> dict[str, Any]:
-            info = self._call(f"{ticker} info", lambda: yf.Ticker(ticker).info) or {}
+            try:
+                info = self._call(f"{ticker} info", lambda: yf.Ticker(ticker).info) or {}
+            except TickerNotFoundError as exc:
+                self._raise_not_found_or_blocked(ticker, f"info call failed: {exc.__cause__ or exc}")
             has_price = any(_num(info.get(k)) for k in ("currentPrice", "regularMarketPrice", "previousClose"))
             if not has_price or not (info.get("longName") or info.get("shortName")):
-                raise TickerNotFoundError(f"No listed company found for ticker '{ticker}'.", details={"ticker": ticker})
+                self._raise_not_found_or_blocked(ticker, f"info had no price/name (keys: {sorted(info)[:12]})")
             return info
 
         return self._cache.get_or_set("info", ticker, self._settings.cache_ttl_market_s, load)
+
+    def _has_prices(self, ticker: str) -> bool:
+        """True if Yahoo's chart endpoint returns recent prices for ``ticker`` (a lighter, separate API)."""
+        try:
+            hist = self._pool.submit(lambda: yf.Ticker(ticker).history(period="5d")).result(timeout=self._settings.provider_timeout_s)
+            return hist is not None and not hist.empty
+        except Exception as exc:  # noqa: BLE001 - any failure here means "no evidence of prices"
+            logger.warning("yfinance chart probe for %s failed: %s", ticker, exc)
+            return False
+
+    def _raise_not_found_or_blocked(self, ticker: str, reason: str) -> None:
+        """An empty quote can mean a bad ticker *or* Yahoo refusing this server. Tell them apart.
+
+        If the ticker (or a known-good reference ticker) has chart prices, the symbol exists or Yahoo is
+        reachable, so the empty quote is Yahoo blocking the quote endpoint for this server's IP address.
+        """
+        logger.warning("Quote for %s unavailable: %s", ticker, reason)
+        if self._has_prices(ticker):
+            raise UpstreamError(
+                "Yahoo Finance is refusing company data to this server right now (common on shared cloud hosts). Try again later.",
+                code="upstream_blocked",
+                details={"ticker": ticker},
+            )
+        reachable = self._cache.get_or_set("probe", "AAPL", 600, lambda: self._has_prices("AAPL"))
+        if not reachable:
+            raise UpstreamError(
+                "Yahoo Finance is not responding to this server (it may be rate-limited). Try again later.",
+                code="upstream_blocked",
+            )
+        raise TickerNotFoundError(f"No listed company found for ticker '{ticker}'.", details={"ticker": ticker})
 
     # ------------------------------------------------------------------ DataProvider
 

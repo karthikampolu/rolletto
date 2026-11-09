@@ -15,8 +15,9 @@ logger = logging.getLogger("rolletto.request")
 
 def configure_logging(level: str) -> None:
     logging.basicConfig(level=level.upper(), format="%(asctime)s %(levelname)s %(name)s: %(message)s")
-    # yfinance logs every missing field at WARNING; we surface those through data_quality instead.
-    logging.getLogger("yfinance").setLevel(logging.CRITICAL)
+    # yfinance logs every missing field at WARNING (surfaced via data_quality instead); keep its errors, which
+    # explain upstream blocks such as rate limits or invalid crumbs.
+    logging.getLogger("yfinance").setLevel(logging.ERROR)
 
 
 class RequestLogMiddleware(BaseHTTPMiddleware):
