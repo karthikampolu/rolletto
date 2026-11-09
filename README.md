@@ -129,9 +129,13 @@ Errors always have the shape `{"error": {"code", "message", "details"}}` (e.g. `
 
 ## Deployment
 
-**Backend (Render or Railway).** Root directory `backend`, build `pip install -r requirements.txt`, start `uvicorn app.main:app --host 0.0.0.0 --port $PORT`. Set `ROLLETTO_CORS_ORIGINS` to a JSON list containing your frontend URL. The in-memory cache is per instance; one instance is plenty to start.
+Free setup: **Render** (free web service) for the API, **Vercel** (Hobby) for the site. Push this repo to GitHub first.
 
-**Frontend (Vercel).** Root directory `frontend`. Set `NEXT_PUBLIC_API_URL` to the backend URL and `NEXT_PUBLIC_SITE_URL` to the public site URL (used for canonical links, sitemap and Open Graph).
+1. **Backend on Render.** Dashboard → New → Blueprint → select the repo. `render.yaml` configures everything (root `backend`, Python 3.12.7, health check `/api/health`). When asked, set `ROLLETTO_CORS_ORIGINS` to `["https://<your-project>.vercel.app"]` (you can fill it in after step 2). Note the API URL, e.g. `https://rolletto-api.onrender.com`.
+2. **Frontend on Vercel.** New Project → import the repo → set **Root Directory** to `frontend` (framework is detected as Next.js). Add `NEXT_PUBLIC_API_URL` = the Render URL and `NEXT_PUBLIC_SITE_URL` = the Vercel URL, then deploy.
+3. **Connect them.** Put the final Vercel URL into `ROLLETTO_CORS_ORIGINS` on Render (Environment tab) and save; Render redeploys. `ROLLETTO_CORS_ORIGIN_REGEX` already allows this project's Vercel preview URLs.
+
+Free-tier caveats: Render's free service sleeps after 15 idle minutes and takes about a minute to wake (the site shows a "waking up" notice). The cache is in memory, so it resets on each wake. Yahoo Finance sometimes rate-limits shared cloud IP addresses; if valuations fail with `upstream_unavailable`, wait and retry, or move the API to a host with a dedicated IP.
 
 ## Known limitations
 

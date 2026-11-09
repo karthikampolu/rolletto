@@ -1,0 +1,23 @@
+# Render Blueprint for the Rolletto API (free web service).
+# Render dashboard → New → Blueprint → pick this repo. Then set ROLLETTO_CORS_ORIGINS to your Vercel URL.
+services:
+  - type: web
+    name: rolletto-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: ROLLETTO_ENVIRONMENT
+        value: production
+      # JSON list of exact origins allowed to call the API, e.g. ["https://rolletto.vercel.app"].
+      - key: ROLLETTO_CORS_ORIGINS
+        sync: false
+      # Also allow this project's Vercel preview deployments (one URL per branch/commit).
+      - key: ROLLETTO_CORS_ORIGIN_REGEX
+        value: https://rolletto[a-z0-9-]*\.vercel\.app

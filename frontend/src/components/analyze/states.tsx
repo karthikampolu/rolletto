@@ -1,7 +1,8 @@
 "use client";
 
-import { AlertOctagon, Landmark, SearchX, WifiOff } from "lucide-react";
+import { AlertOctagon, Landmark, Loader2, SearchX, WifiOff } from "lucide-react";
 import Link from "next/link";
+import * as React from "react";
 
 import { useFmt } from "@/components/analyze/format-context";
 import { TickerSearch } from "@/components/search/ticker-search";
@@ -12,6 +13,27 @@ import { ApiError } from "@/lib/http";
 import { pct } from "@/lib/format";
 import type { Company } from "@/lib/schemas";
 import { cn } from "@/lib/utils";
+
+/**
+ * Free hosting (e.g. Render's free plan) puts the API to sleep when idle; the first request then takes
+ * up to a minute. After a few seconds of loading, say so instead of leaving a silent skeleton.
+ */
+function SlowLoadNotice() {
+  const [slow, setSlow] = React.useState(false);
+  React.useEffect(() => {
+    const id = setTimeout(() => setSlow(true), 6000);
+    return () => clearTimeout(id);
+  }, []);
+  if (!slow) return null;
+  return (
+    <div role="status" className="fixed inset-x-0 bottom-6 z-40 flex justify-center px-4">
+      <p className="flex items-center gap-2 rounded-full border border-border-strong bg-bg-elevated px-4 py-2 text-sm text-fg-muted shadow-token-lg">
+        <Loader2 className="size-4 animate-spin text-accent" aria-hidden="true" />
+        Waking up the valuation server — the first load can take up to a minute.
+      </p>
+    </div>
+  );
+}
 
 export function WorkspaceSkeleton() {
   return (
@@ -49,6 +71,7 @@ export function WorkspaceSkeleton() {
       <p className="sr-only" role="status">
         Fetching statements and market data…
       </p>
+      <SlowLoadNotice />
     </div>
   );
 }

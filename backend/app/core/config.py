@@ -54,6 +54,8 @@ class Settings(BaseSettings):
     environment: str = "development"
     log_level: str = "INFO"
     cors_origins: list[str] = ["http://localhost:3000", "http://127.0.0.1:3000"]
+    #: Optional regex of extra allowed origins, e.g. Vercel preview URLs (https://rolletto[a-z0-9-]*\.vercel\.app).
+    cors_origin_regex: str | None = None
 
     cache_ttl_financials_s: int = 12 * 3600
     cache_ttl_market_s: int = 15 * 60

@@ -155,3 +155,16 @@ def test_memo_export(client):
     r = client.post("/api/export/memo", json=_body())
     assert r.status_code == 200 and r.content[:4] == b"%PDF"
     assert r.headers["content-type"] == "application/pdf"
+
+
+def test_cors_allows_configured_regex(monkeypatch):
+    from app.core.config import Settings
+    from app.main import create_app
+
+    monkeypatch.setattr("app.main.get_settings", lambda: Settings(cors_origin_regex=r"https://rolletto[a-z0-9-]*\.vercel\.app"))
+    client = TestClient(create_app())
+    preview = "https://rolletto-git-main-me.vercel.app"
+    ok = client.options("/api/health", headers={"Origin": preview, "Access-Control-Request-Method": "GET"})
+    assert ok.headers.get("access-control-allow-origin") == preview
+    blocked = client.options("/api/health", headers={"Origin": "https://evil.example", "Access-Control-Request-Method": "GET"})
+    assert "access-control-allow-origin" not in blocked.headers
